@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhumi's Pizza House</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Navbar background color */
+        .navbar {
+            background-color: orange;
+        }
+        
+        /* Adjust logo size */
+        .navbar-brand img {
+            height: 50px; /* Adjust as per your requirement */
+        }
+        
+        /* Custom image size for carousel */
+        .carousel {
+            width: 824px;  /* Adjust carousel width */
+            height: 360px; /* Adjust carousel height */
+            margin: 0 auto; /* Center the carousel */
+        }
+
+        .carousel-item img {
+            width: 100%; /* Ensure the image fits the width of the carousel */
+            height: 100%; /* Set image height */
+            object-fit: cover; /* Ensure the image covers the entire carousel area without distortion */
+        }
+
+        /* Center the restaurant name in the navbar */
+        .navbar h3 {
+            color: white;
+            margin-left: 10px;
+        }
+        .nav-link {
+            color: black !important; /* Black text color */
+            font-weight: bold; /* Make text bold */
+            font-size: 1.2rem; /* Increase font size */
+            padding: 10px 15px; /* Add padding for more space */
+            transition: color 0.3s; /* Add transition for hover effect */
+        }
+
+        .nav-link:hover {
+            color: white !important; /* Change hover color */
+            background-color: rgba(0, 0, 0, 0.1); /* Optional: add a slight background on hover */
+        }
+        /* Menu Section */
+        .menu-section {
+            padding: 50px 0; /* Add padding for the section */
+            background-color: #f8f9fa; /* Light background color */
+        }
+
+        .menu-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem; /* Title size */
+            color: #ff6600; /* Orange color */
+        }
+
+        .pizza-card {
+            margin: 15px;
+            border: 1px solid #ff6600; /* Orange border */
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+            transition: transform 0.3s; /* Add animation */
+        }
+
+        .pizza-card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+        .pizza-image {
+            max-width: 100%; /* Make image responsive */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Optional: round image corners */
+            margin-bottom: 10px; /* Space below the image */
+        }
+
+        .buy-button {
+            background-color: #ff6600; /* Orange button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Transition effect */
+        }
+
+        .buy-button:hover {
+            background-color: #cc5200; /* Darker orange on hover */
+        }
+        
+
+
+
+    /* Chatbot Icon Styles */
+    .chatbot-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ff6600;
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+    .chatbot-icon img {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Chat Popup Styles */
+    
+    .chat-popup {
+        display: none; /* Initially hide the chat popup */
+        position: fixed; /* Positioning to keep it on top */
+        bottom: 20px; /* Position it from the bottom */
+        right: 20px; /* Position it from the right */
+        width: 350px; /* Width of the popup */
+        border: 1px solid #ccc; /* Border styling */
+        background-color: #bf4040; /* Background color */
+        box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Shadow for depth */
+    }
+
+    .chat-header {
+        background-color: #ac5353;
+        color: white;
+        padding: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chat-body {
+        padding: 15px;
+    }
+
+    /* Close Chat Button */
+    .close-chat {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    /* Media Queries for Responsive Chat */
+    @media only screen and (max-width: 600px) {
+        .chat-popup {
+            width: 90%;
+            bottom: 50px;
+            right: 5%;
+        }
+    }
+
+</style>
+<!-- JavaScript for Chatbot Interaction -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("chatbot-icon").addEventListener("click", function() {
+            document.getElementById("chatPopup").style.display = "block";
+        });
+
+        document.getElementById("closeChat").addEventListener("click", function() {
+            document.getElementById("chatPopup").style.display = "none";
+        });
+    });
+</script>
+
+        
+    
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" alt="Bhumi's Pizza House">
+        </a>
+        <h3>Bhumi's Pizza House</h3>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#reviews">Reviews</a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<img src="main.png" ,alt="Bhumi's Pizza House">
+<hr>
+
+<!-- Menu Section -->
+<div class="menu-section" id="menu">
+    <div class="container">
+        <h2 class="menu-title">Our Delicious Pizzas</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="margheritaPizza.jpg" alt="Margherita Pizza" class="pizza-image">
+                    <h5>Margherita Pizza</h5>
+                    <p>Price: Rs.299</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="pepperoni.jpeg" alt="Pepperoni Pizza" class="pizza-image">
+                    <h5>Pepperoni Pizza</h5>
+                    <p>Price: Rs.499</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="BBQ-Chicken.jpg" alt="BBQ Chicken Pizza" class="pizza-image">
+                    <h5>BBQ Chicken Pizza</h5>
+                    <p>Price: Rs.350</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="veggie-pizza.jpg" alt="Veggie Pizza" class="pizza-image">
+                    <h5>Veggie Pizza</h5>
+                    <p>Price: Rs.399</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="hawaiian.jpg" alt="Hawaiian Pizza" class="pizza-image">
+                    <h5>Hawaiian Pizza</h5>
+                    <p>Price: Rs.199</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="cheese.jpg" alt="Cheese Pizza" class="pizza-image">
+                    <h5>Cheese Pizza</h5>
+                    <p>Price: Rs.299</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="Mexican.jpg" alt="Mexican Pizza" class="pizza-image">
+                    <h5>Mexican Pizza</h5>
+                    <p>Price: Rs.299</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="paneer.jpg" alt="Paneer Tikka Pizza" class="pizza-image">
+                    <h5>Paneer Tikka Pizza</h5>
+                    <p>Price: Rs.399</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pizza-card">
+                    <img src="mushroom.jpg" alt="Mushroom Pizza" class="pizza-image">
+                    <h5>Mushroom Pizza</h5>
+                    <p>Price: Rs.250</p>
+                    <button class="buy-button">Order Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- Reviews Section -->
+<div class="reviews-section" id="reviews" style="background-color: #f8f9fa; padding: 50px 0;">
+    <div class="container">
+        <h2 class="text-center" style="color: #ff6600; margin-bottom: 30px;">Customer Reviews</h2>
+        <div class="row">
+            <!-- Review 1 -->
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="card-text">"The Margherita Pizza was absolutely delicious! The crust was perfect, and the cheese just melted in my mouth. Will definitely order again!"</p>
+                        <p class="card-text"><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Jane Smith</h5>
+                        <p class="card-text">"Loved the Pepperoni Pizza! It was cooked to perfection and had just the right amount of toppings. Highly recommended!"</p>
+                        <p class="card-text"><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Michael Brown</h5>
+                        <p class="card-text">"The BBQ Chicken Pizza was out of this world! Great flavors, fast delivery, and fantastic service."</p>
+                        <p class="card-text"><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<!-- About Us Section -->
+<div class="about-section" id="about" style="padding: 60px 0; background-color: #f8f9fa;">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="mb-4" style="color: #ff6600; font-weight: bold;">About Us</h2>
+            <p class="lead" style="color: #333;">
+                Welcome to Bhumi's Pizza House, where we serve the best pizzas in town, made with love and the freshest ingredients. Enjoy a cozy dining experience, or order online to relish our delicious pizzas at home!
+            </p>
+        </div>
+        <hr>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h4 style="color: #ff6600;">Our Story</h4>
+                <p style="color: #555; line-height: 1.6;">
+                    At Bhumi's Pizza House, our mission is simple – to provide the tastiest and most authentic pizzas for pizza lovers everywhere. From our signature Margherita to our mouth-watering Paneer Tikka Pizza, we offer a wide range of options to satisfy every craving.
+                </p>
+                <p style="color: #555; line-height: 1.6;">
+                    Whether you're dining in or taking out, we guarantee fast service, friendly staff, and a pizza experience you'll never forget. Come visit us, or enjoy a pizza night at home with your family and friends!
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h4 style="color: #ff6600;">Get in Touch</h4>
+                <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <ul class="list-unstyled" style="color: #333; font-size: 16px;">
+                        <li><strong>Address:</strong> Nashik,Maharashtra</li>
+                        <li><strong>Email:</strong> <a href="mailto:zaltebhumi@gmail.com" style="color: blue">zaltebhumi@gmail.com</a></li>
+                        <li><strong>Phone:</strong> <a href="tel:+1234567890" style="color:blue">+123-456-7890</a></li>
+                        <li><strong>Hours:</strong> Mon-Sun: 11:00 AM - 10:00 PM</li>
+                    </ul>
+                    <h5 class="mt-4" style="color: #ff6600;">Follow Us</h5>
+                    <div>
+                        <a href="#" class="mr-3"><img src="facebook.jpg" alt="Facebook" width="30"></a>
+                        <a href="#" class="mr-3"><img src="twitter.png" alt="Twitter" width="30"></a>
+                        <a href="#"><img src="insta.png" alt="Instagram" width="30"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chatbot Section (Floating Chat Icon) -->
+<div id="chatbot-container">
+    <div class="chatbot-icon" id="chatbot-icon">
+        <img src="chat.png" alt="Chat with us" width="50">
+    </div>
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h5>Chat With Us</h5>
+            <button type="button" class="close-chat" id="closeChat">&times;</button>
+        </div>
+        <div class="chat-body">
+            <!-- Dialogflow Chatbot Widget -->
+            <iframe width="320" height="500" allow="microphone;" 
+            src="https://console.dialogflow.com/api-client/demo/embedded/d684e76c-44f8-48ff-b7f1-8e4abebc854c"></iframe>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
